@@ -63,6 +63,10 @@ public class PlayerShoot : MonoBehaviour
 
             if(Physics.Raycast(transform .position, transform.forward, out hit))
             {
+                if (hit.transform.CompareTag("Enemy"))
+                {
+                    hit.transform.GetComponent<EnemyScript>().TakeDamage(5);
+                }
                 Debug.DrawRay(transform.position, transform.forward * hit.distance, hitColor);
                 //Debug.Break(); solo para detectar errores
             }

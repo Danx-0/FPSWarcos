@@ -2,6 +2,7 @@ using System.Threading;
 using TMPro;
 using UnityEditor.Build.Content;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -62,6 +63,9 @@ public class GameManager : MonoBehaviour
 
     }
 
-
+    public void ReloadLevel()// pa que cuando muera reinicie el juego 
+    {
+        SceneManager.LoadScene(1);
+    }
 
 }
