@@ -17,6 +17,8 @@ public class EnemyScript : MonoBehaviour
     [SerializeField]
     public List<Transform> patrolPoint = new List<Transform>();
 
+    private int currentPoint;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();   
@@ -41,9 +43,26 @@ public class EnemyScript : MonoBehaviour
             agent.destination = Player.position;
         }
         else
-        {
-            //agent.destination = transform.position;
-            agent.destination = patrolPoint[0].position;
+        {   
+                if (Vector3.Distance(transform.position, patrolPoint[currentPoint].position) >=3 )
+                {
+                    agent.destination = patrolPoint[currentPoint].position;
+                }
+            else
+            {
+                if (currentPoint < patrolPoint.Count-1)
+                {
+                  currentPoint++;
+                }
+                else
+                {
+                    currentPoint = 0;
+                }
+                
+            }
+
+                //agent.destination = transform.position;
+                //agent.destination = patrolPoint[0].position;
         }
 
 
@@ -62,6 +81,7 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage (float value)
     {
         health -= value;    
+       // GetComponent
         if (health <= 0)
         {
             Destroy (this.gameObject);
