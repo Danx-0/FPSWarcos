@@ -68,4 +68,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void AddTime(float time)
+    {
+        GameTime += time;   
+    }
+
 }

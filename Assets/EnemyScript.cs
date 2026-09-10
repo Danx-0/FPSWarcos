@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -13,10 +14,12 @@ public class EnemyScript : MonoBehaviour
 
     [SerializeField]
     public GameObject knife;
+    [SerializeField]
+    public GameObject drop;
 
     [SerializeField]
     public List<Transform> patrolPoint = new List<Transform>();
-
+    
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();   
@@ -64,6 +67,7 @@ public class EnemyScript : MonoBehaviour
         health -= value;    
         if (health <= 0)
         {
+            Instantiate(drop,transform.position, Quaternion.identity);
             Destroy (this.gameObject);
         }
     }

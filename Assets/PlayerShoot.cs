@@ -56,10 +56,9 @@ public class PlayerShoot : MonoBehaviour
             RaycastHit hit;
             bullets--;
             UpdateBulletText();
-           /* if (!shootParticles.isPlaying)
-            {
-               shootParticles.Play();
-            }*/
+           //shootaudio.Play();
+            shootParticles.Play();
+            
 
             if(Physics.Raycast(transform .position, transform.forward, out hit))
             {
