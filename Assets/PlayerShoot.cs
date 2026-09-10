@@ -14,6 +14,8 @@ public class PlayerShoot : MonoBehaviour
     private TMP_Text bulletText;
     [SerializeField]
     private InputAction reloadkey;
+    [SerializeField]
+    private AudioSource shootAudio;
 
     private void OnEnable()
     {
@@ -55,6 +57,7 @@ public class PlayerShoot : MonoBehaviour
         {
             RaycastHit hit;
             bullets--;
+            shootAudio .Play(); 
             UpdateBulletText();
            //shootaudio.Play();
             shootParticles.Play();
