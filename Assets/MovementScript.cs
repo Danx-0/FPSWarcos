@@ -65,7 +65,7 @@ public class MovementScript: MonoBehaviour
             if (grounded && jumpInput.triggered)
             {
                 print("hola");
-                playerVelocity.y = Mathf.Sqrt(12 * -2 * gravityValue);
+                playerVelocity.y = Mathf.Sqrt(1 * -2 * gravityValue);
             }
 
             playerVelocity.y += gravityValue * Time.deltaTime;
