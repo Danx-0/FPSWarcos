@@ -6,9 +6,9 @@ using UnityEngine.Rendering;
 public class Ammo : MonoBehaviour
 {
     [SerializeField]
-    private int amountAmmo = 5;
-    private int amountTime = 2;
-    private int amountLife = 25;
+    private int amountAmmo = 15;
+    private int amountTime = 10;
+    private int amountLife = 10;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

@@ -153,5 +153,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd4176addf4b2e44c874d9747d4f57ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ammo
-  amountAmmo: 5
+  amountAmmo: 10
   currentSelection: 0

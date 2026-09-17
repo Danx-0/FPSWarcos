@@ -3,8 +3,11 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
+
+
     [SerializeField]
-    private float health = 5;
+    private float maxHealth = 5;
+    private float health;
 
     [SerializeField]
     private Slider healthSlider;
@@ -14,7 +17,8 @@ public class PlayerHealth : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        healthSlider.value = health/10;    
+        health = maxHealth;
+        healthSlider.value = health/maxHealth;    
     }
 
     // Update is called once per frame
@@ -26,10 +30,11 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage (float damage)// pa que cuando muera reinicie el juego 
     {
         health -= damage;
-        healthSlider.value = health / 10;
+        health = Mathf.Clamp(health, 0, maxHealth);
+        healthSlider.value = health/maxHealth;
         if (health <= 0)
         {
-            GameManager.instance.ReloadLevel();
+            GameManager.instance.GameOverGame();
         }
     }
 }

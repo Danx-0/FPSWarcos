@@ -7,7 +7,7 @@ public class KnifeScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlayerHealth>().TakeDamage(5);
+            other.GetComponent<PlayerHealth>().TakeDamage(10);
         }
     }
 }

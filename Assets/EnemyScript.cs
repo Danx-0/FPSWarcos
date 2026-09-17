@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using DG.Tweening;
+
 
 public class EnemyScript : MonoBehaviour
 {
@@ -19,7 +21,14 @@ public class EnemyScript : MonoBehaviour
 
     [SerializeField]
     public List<Transform> patrolPoint = new List<Transform>();
-    
+
+    private int currentpoint = 0;
+    [SerializeField]
+    private Material damageMaterial;
+
+    private Material OrgMaterial;
+
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();   
@@ -32,7 +41,9 @@ public class EnemyScript : MonoBehaviour
         // agent.destination = new Vector3(10, 1, 10); 
 
         Player = GameObject.Find("Player").transform;
-        agent.stoppingDistance = 2;
+        agent.stoppingDistance = 1;
+        OrgMaterial = GetComponent<MeshRenderer>().material;
+
     }
 
     // Update is called once per frame
@@ -45,14 +56,21 @@ public class EnemyScript : MonoBehaviour
         }
         else
         {
+            if (Vector3.Distance(transform.position, patrolPoint[currentpoint].position) < 2.5f)
+            {
+                print("fuciono" + currentpoint);
+
+                currentpoint = (currentpoint + 1) % patrolPoint.Count;
+
+            }
             //agent.destination = transform.position;
-            agent.destination = patrolPoint[0].position;
+            agent.destination = patrolPoint[currentpoint].position;
         }
 
 
 
 
-        if (Vector2.Distance(transform.position, Player.position) <= agent.stoppingDistance)
+        if (Vector3.Distance(transform.position, Player.position) <= agent.stoppingDistance)
         {
             knife.SetActive(true);
         }
@@ -62,12 +80,21 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    void ResetMaterial()
+    {
+        GetComponent<MeshRenderer>().material = OrgMaterial;
+    }
+
     public void TakeDamage (float value)
     {
-        health -= value;    
+        health -= value;
+        GetComponent<MeshRenderer>().material = damageMaterial;
+        Invoke("ResetMaterial", 0.1f);
+
         if (health <= 0)
         {
             Instantiate(drop,transform.position, Quaternion.identity);
+            GameManager.instance.AddScore(10);
             Destroy (this.gameObject);
         }
     }
